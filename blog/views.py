@@ -1,9 +1,11 @@
 from django.shortcuts import render
 
 # Create your views here.
-def lista_articulos(request):
+def listar_articulos(request):
     contexto={
-        'articulos': Articulo.objects.all()
+        'articulos': [
+            {'titulo': 'Primer viaje', 'subtitulo': 'Viaje a Europa', 'cuerpo': 'Viaje en familia a Europa con promo aérea', 'autor': 'Gabriela', 'fecha_publicacion': '2023-05-21'},
+        ]
     }
     http_response= render(
         request=request,
