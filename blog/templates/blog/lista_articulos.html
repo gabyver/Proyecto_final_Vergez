@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block contenido %}
+<section>
+    <div>
+        <h1>Lista de Articulos</h1>
+        <ul>
+            {% for post in Articulos %}
+            <li>{{post.titulo}} \n {{post.subtitulo}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% endblock contenido %}
