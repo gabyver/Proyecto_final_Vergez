@@ -7,4 +7,11 @@ def saludar(request):
     pagina_html = HttpResponse(saludo)
     return pagina_html
 
-
+def saludar_con_html(request):
+    contexto={}
+    Http_response= render(
+        request= request,
+        template_name='blog/base.html',
+        context=contexto,
+    )
+    return Http_response
