@@ -9,18 +9,18 @@
 + Entra en la carpeta que acabas de clonar
 + Para instalar las dependencias corre este comando:
 
-'''
+```
 pip install -r requirements.txt
-'''
+```
 
 ## Instrucciones para entrar al panel administrativo de Django
 
 + En consola, crea un superusuario:
-'''
+```
 python manage.py createsuperuser
-'''
+```
 
 + Acceder con usuario y contraseña a través de:
-'''
+```
 127.0.0.1:8000/admin
-'''
+```
