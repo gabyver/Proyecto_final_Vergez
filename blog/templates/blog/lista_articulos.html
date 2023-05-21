@@ -5,10 +5,12 @@
     <div>
         <h1>Lista de Articulos</h1>
         <ul>
-            {% for post in Articulos %}
-            <li>{{post.titulo}} \n {{post.subtitulo}}</li>
+            {% for articulo in Articulos %}
+            <li>{{articulo.titulo}} - {{articulo.subtitulo}}</li>
             {% endfor %}
         </ul>
     </div>
 </section>
 {% endblock contenido %}
+
+

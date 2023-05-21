@@ -1,15 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from blog.models import Articulo
 
 # Create your views here.
 def listar_articulos(request):
     contexto={
-        'articulos': [
-            {'titulo': 'Primer viaje', 'subtitulo': 'Viaje a Europa', 'cuerpo': 'Viaje en familia a Europa con promo aérea', 'autor': 'Gabriela', 'fecha_publicacion': '2023-05-21'},
-        ]
+        'articulos': Articulo.objects.all()
     }
     http_response= render(
         request=request,
         template_name='blog/lista_articulos.html',
-        context=contexto,
+        context= {'articulos': Articulo},
     )
     return http_response
