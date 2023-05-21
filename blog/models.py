@@ -8,11 +8,11 @@ class Articulo(models.Model):
     cuerpo= models.TextField()
     autor= models.ForeignKey(User, on_delete=models.CASCADE)
     fecha_publicacion= models.DateTimeField(auto_now_add=True)
-    imagen= models.ImageField(upload_to='images')
+    imagen= models.ImageField(upload_to='images', blank=True)
 
     class Meta:
         ordering = ['-fecha_publicacion']
 
     def __str__(self):
-        return self.titulo
+        return f"{self.titulo} - {self.subtitulo}"
 # Create your models here.
