@@ -3,6 +3,7 @@ from django.urls import reverse
 from blog.models import Articulo
 from blog.forms import ArticuloForm
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
     
 
 
@@ -47,13 +48,13 @@ def buscar_articulo(request):
     if request.method == 'POST':
         data= request.POST
         busqueda= data['busqueda']
-        articulos= Articulo.objects.filter(titulo__icontains=busqueda)
+        articulos= Articulo.objects.filter(Q(titulo__icontains=busqueda)| Q(subtitulo__icontains=busqueda))
         contexto= {
             'articulos': articulos,
         }
         http_response= render(
             request= request, 
-            template_name= 'blog/lista_articulo.html', 
+            template_name= 'blog/lista_articulos.html', 
             context=contexto,
         )
         return http_response
