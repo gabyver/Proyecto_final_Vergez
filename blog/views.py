@@ -44,7 +44,7 @@ def crear_articulo(request):
     return http_response
 
    
-def buscar_articulo(request):
+def buscar_articulos(request):
     if request.method == 'POST':
         data= request.POST
         busqueda= data['busqueda']

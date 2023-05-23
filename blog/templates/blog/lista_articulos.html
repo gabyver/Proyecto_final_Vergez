@@ -6,17 +6,26 @@
         <h1>Lista de Articulos</h1>
         <a href= "{% url 'crear_articulo' %}">Crear Articulo</a>
         <br><br>
-        <form action= "{% url 'buscar_articulo' %}" method= "post">
+        <form action= "{% url 'buscar_articulos' %}" method= "post">
             {% csrf_token %}
             <input type= "text" name= "busqueda"> 
             <input type= "submit" value= "Buscar">
         </form>
         <br><br>
-        <ul>
-        {% for articulo in articulos %}
-            <li>{{articulo.titulo}}, {{articulo.subtitulo}}</li>
-        {% endfor %}
-        </ul>
+        <table class= "table">
+            <tbody>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Subtitulo</th>
+                </tr>
+                {% for articulo in articulos %}
+                <tr>
+                    <td>{{articulo.titulo }}</td>
+                    <td>{{articulo.subtitulo}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>                
     </div>
 </section>
 {% endblock contenido %}
