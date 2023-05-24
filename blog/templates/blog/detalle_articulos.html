@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block contenido %}
+<section>
+    <div>
+        <p><strong> Titulo: </strong>{{articulo.titulo}}</p>
+        <p><strong> Subtitulo: </strong>{{articulo.subtitulo}}</p>
+        <p><strong> Cuerpo: </strong>{{articulo.cuerpo}}</p>
+        <p><strong> Autor: </strong>{{articulo.autor}}</p>
+        <p><strong> Fecha de publicacion: </strong>{{articulo.fecha_publicacion}}</p>
+        <br>
+        <a href ="{% url 'lista_articulos' %}">Volver lista </a>
+    </div>
+</section>
+{% endblock contenido %}

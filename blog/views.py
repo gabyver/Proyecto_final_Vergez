@@ -32,6 +32,7 @@ def crear_articulo(request):
     return http_response
 
 
+
 def listar_articulos(request):
     articulos= Articulo.objects.all()
     contexto = {
@@ -44,7 +45,8 @@ def listar_articulos(request):
     )
     return http_response
 
-   
+
+
 def buscar_articulos(request):
     if request.method == 'POST':
         data= request.POST
@@ -61,28 +63,20 @@ def buscar_articulos(request):
         return http_response
     else:
         return redirect('lista_articulos')
-    
 
 
-@login_required
-def eliminar_articulo(request, id): #pasamos id como argumento para saber que articulo es
-    articulo= Articulo.objects.get(id= id)
-    if request.method=="POST":
-        articulo.delete() #borra el articulo
-        url_exitosa=reverse('lista_articulos') #manda a url_exitosa donde ya no esta ese articulo
-        return redirect(url_exitosa)
-    else:
-        contexto= {
-            'articulo': articulo
-        }
-        http_response= render(
-            request= request, 
-            template_name= 'blog/articulo_confirm_delete.html', 
-            context=contexto,
-        )
-        return http_response
-    
-  
+
+def ver_articulo(request, id):
+    articulo= Articulo.objects.get(id= id)  # Obtener el artículo por su ID
+    contexto = {
+        'articulo': articulo
+    }
+    return render(
+        request= request,
+        template_name= 'blog/detalle_articulos.html', 
+        context=contexto,
+    )
+
 
 
 @login_required
@@ -111,3 +105,27 @@ def editar_articulo(request, id):
         template_name= 'blog/crear_articulo.html',
         context={'form': form},
     )
+
+
+
+@login_required
+def eliminar_articulo(request, id): #pasamos id como argumento para saber que articulo es
+    articulo= Articulo.objects.get(id= id)
+    if request.method=="POST":
+        articulo.delete() #borra el articulo
+        url_exitosa=reverse('lista_articulos') #manda a url_exitosa donde ya no esta ese articulo
+        return redirect(url_exitosa)
+    else:
+        contexto= {
+            'articulo': articulo
+        }
+        http_response= render(
+            request= request, 
+            template_name= 'blog/articulo_confirm_delete.html', 
+            context=contexto,
+        )
+        return http_response
+    
+  
+
+

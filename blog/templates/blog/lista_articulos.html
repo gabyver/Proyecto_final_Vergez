@@ -29,7 +29,7 @@
                     <td>{{articulo.titulo }}</td>
                     <td>{{articulo.subtitulo}}</td>
                     <td>
-                        <a href= "{% url 'lista_articulos' %}">Ver</i></a>
+                        <a href= "{% url 'ver_articulo' articulo.id %}">Ver</a>
                     </td>
                     <td>
                         <a href= "{% url 'editar_articulo' articulo.id %}">Editar</a>
