@@ -32,7 +32,7 @@ def crear_articulo(request):
             cuerpo= data["cuerpo"]
             autor= data["autor"]
             articulo= Articulo.objects.create(titulo=titulo, subtitulo= subtitulo, cuerpo= cuerpo, autor=autor)
-            url_exitosa=reverse('lista_articulos')
+            url_exitosa=reverse('lista_articulos') #redirecciono a la lista de articulos
             return redirect(url_exitosa)
     else:
         form = ArticuloForm()
@@ -62,3 +62,33 @@ def buscar_articulos(request):
         return redirect('lista_articulos')
 
 
+@login_required
+def eliminar_articulo(request, id): #pasamos id como argumento para saber que articulo es
+    articulo= Articulo.objects.get(id= id)
+    if request.method=="POST":
+        articulo.delete() #borra el articulo
+        url_exitosa=reverse('lista_articulos') #manda a url_exitosa donde ya no esta ese articulo
+        return redirect(url_exitosa)
+    
+@login_required
+def editar_articulo(request, id): 
+    articulo= Articulo.objects.get(id= id)
+    if request.method=="POST":
+        form= ArticuloForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            articulo.titulo= data["titulo"]
+            articulo.subtitulo= data["subtitulo"]
+            articulo.cuerpo= data["cuerpo"]
+            articulo.autor= data["autor"]
+            articulo.save()
+            return redirect('lista_articulos') 
+        else:
+            inicial={
+                'titulo': articulo.titulo,
+                'subtitulo': articulo.subtitulo,
+                'cuerpo': articulo.cuerpo,
+                'autor': articulo.autor,
+            }
+            form= ArticuloForm(initial= inicial)
+        

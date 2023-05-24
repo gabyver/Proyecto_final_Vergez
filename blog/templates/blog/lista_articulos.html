@@ -12,20 +12,37 @@
             <input type= "submit" value= "Buscar">
         </form>
         <br><br>
+
         <table class= "table">
             <tbody>
                 <tr>
+                    <th>ID</th>
                     <th>Titulo</th>
                     <th>Subtitulo</th>
+                    <th>Eliminar</th>
                 </tr>
                 {% for articulo in articulos %}
                 <tr>
+                    <td>{{articulo.id }}</td>
                     <td>{{articulo.titulo }}</td>
                     <td>{{articulo.subtitulo}}</td>
+                    <td>
+                        <a href= "{% url 'ver_articulo' articulo.id %}">Ver</a>
+                    </td>
+                    <td>
+                        <a href= "{% url 'editar_articulo' articulo.id %}">Editar</a>
+                    </td>
+                    <td>
+                        <form action = "{% url 'eliminar_articulo' articulo.id %}"method="post">
+                            {% csrf_token %}
+                            <i class= "bi bi-trash"></i>
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
-        </table>                
+        </table>   
+
     </div>
 </section>
 {% endblock contenido %}
