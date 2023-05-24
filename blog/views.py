@@ -8,18 +8,6 @@ from django.db.models import Q
 
 
 # Create your views here.
-def listar_articulos(request):
-    articulos= Articulo.objects.all()
-    contexto = {
-        'articulos': articulos
-    }
-    http_response= render(
-        request=request,
-        template_name='blog/lista_articulos.html',
-        context= contexto,
-    )
-    return http_response
-
 
 @login_required
 def crear_articulo(request):
@@ -43,6 +31,19 @@ def crear_articulo(request):
         )
     return http_response
 
+
+def listar_articulos(request):
+    articulos= Articulo.objects.all()
+    contexto = {
+        'articulos': articulos
+    }
+    http_response= render(
+        request=request,
+        template_name='blog/lista_articulos.html',
+        context= contexto,
+    )
+    return http_response
+
    
 def buscar_articulos(request):
     if request.method == 'POST':
@@ -60,6 +61,7 @@ def buscar_articulos(request):
         return http_response
     else:
         return redirect('lista_articulos')
+    
 
 
 @login_required
@@ -69,7 +71,20 @@ def eliminar_articulo(request, id): #pasamos id como argumento para saber que ar
         articulo.delete() #borra el articulo
         url_exitosa=reverse('lista_articulos') #manda a url_exitosa donde ya no esta ese articulo
         return redirect(url_exitosa)
+    else:
+        contexto= {
+            'articulo': articulo
+        }
+        http_response= render(
+            request= request, 
+            template_name= 'blog/articulo_confirm_delete.html', 
+            context=contexto,
+        )
+        return http_response
     
+  
+
+
 @login_required
 def editar_articulo(request, id): 
     articulo= Articulo.objects.get(id= id)
@@ -83,12 +98,16 @@ def editar_articulo(request, id):
             articulo.autor= data["autor"]
             articulo.save()
             return redirect('lista_articulos') 
-        else:
-            inicial={
-                'titulo': articulo.titulo,
-                'subtitulo': articulo.subtitulo,
-                'cuerpo': articulo.cuerpo,
-                'autor': articulo.autor,
-            }
-            form= ArticuloForm(initial= inicial)
-        
+    else:
+        inicial={
+            'titulo': articulo.titulo,
+            'subtitulo': articulo.subtitulo,
+            'cuerpo': articulo.cuerpo,
+            'autor': articulo.autor,
+        }
+        form= ArticuloForm(initial= inicial)
+    return render(
+        request=request,
+        template_name= 'blog/crear_articulo.html',
+        context={'form': form},
+    )
