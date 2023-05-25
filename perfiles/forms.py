@@ -12,6 +12,7 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['last_name', 'first_name', 'username', 'email', 'password1', 'password2']
 
+
     def clean_username(self):
         username = self.cleaned_data['username']
         if User.objects.filter(username=username).exists():
@@ -23,3 +24,11 @@ class UserRegisterForm(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError('Este correo electrónico ya está resgitrado.')
         return email
+
+
+# Permitir al usuario editar sus datos
+class UserUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ['last_name', 'first_name', 'email']

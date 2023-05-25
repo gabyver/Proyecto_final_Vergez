@@ -4,8 +4,10 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LogoutView
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
-from perfiles.forms import UserRegisterForm 
+from perfiles.forms import UserRegisterForm, UserUpdateForm 
+
 
 # Create your views here.
 def registro(request):
@@ -51,7 +53,23 @@ def login_view(request):
         context={'form':formulario},
     )
 
-
-class CustomLogoutView(LogoutView):
-    template_name= 'perfiles/logout.html'
+@login_required
+def custom_logout_view(request):
+    view = LogoutView.as_view(template_name='perfiles/logout.html')
+    return view(request)
     
+
+
+@login_required
+def mi_perfil_update(request):
+    if request.method == "POST":
+        form = UserUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('inicio')
+    else:
+        form = UserUpdateForm(instance=request.user)
+
+    context = {'form': form}
+    return render(request, 'perfiles/formulario_perfil.html', context)
+
