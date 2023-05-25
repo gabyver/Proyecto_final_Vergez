@@ -32,10 +32,20 @@
                         <a href= "{% url 'ver_articulo' articulo.id %}">Ver</a>
                     </td>
                     <td>
-                        <a href= "{% url 'editar_articulo' articulo.id %}">Editar</a>
+                        {% if user == articulo.autor %}
+                        <form action = "{% url 'editar_articulo' articulo.id %}" method="post">
+                            {% csrf_token %}
+                            <input type= "submit" value= "Editar"/>
+                        </form>
+                        {% endif %}
                     </td>
                     <td>
-                        <a href = "{% url 'eliminar_articulo' articulo.id %}">Eliminar</a>
+                        {% if user == articulo.autor %}
+                        <form action = "{% url 'eliminar_articulo' articulo.id %}" method="post">
+                            {% csrf_token %}
+                            <input type= "submit" value= "Eliminar"/>
+                        </form>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}

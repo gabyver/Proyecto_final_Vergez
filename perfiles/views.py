@@ -28,17 +28,21 @@ def registro(request):
     
 
 def login_view(request):
-    next_url=request.GET.get('next')
-    if request.method=="POST":
+    next_url = request.GET.get('next')
+    if request.method =="POST":
         formulario=AuthenticationForm(request, data= request.POST)
+
         if formulario.is_valid():
-            data=formulario.cleaned_data
-            usuario= data.get('username')
-            password=data.get('password')
-            user=authenticate(username=usuario, password=password)
-            if user:
+            data = formulario.cleaned_data
+            usuario = data.get('username')
+            password = data.get('password')
+            user = authenticate(username=usuario, password=password)
+
+            if user: #is not None
                 login(request=request, user=user)
-            return redirect(reverse('inicio'))
+                if next_url:
+                    return redirect(next_url)
+                return redirect(reverse('lista_articulos'))
     else:
         formulario=AuthenticationForm()
     return render(
@@ -50,4 +54,4 @@ def login_view(request):
 
 class CustomLogoutView(LogoutView):
     template_name= 'perfiles/logout.html'
-    next_page=reverse_lazy('inicio')
+    

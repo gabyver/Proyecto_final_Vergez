@@ -4,7 +4,7 @@ from blog.models import Articulo
 from blog.forms import ArticuloForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-    
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -18,7 +18,7 @@ def crear_articulo(request):
             titulo= data["titulo"]
             subtitulo= data["subtitulo"]
             cuerpo= data["cuerpo"]
-            autor= data["autor"]
+            autor= request.user
             articulo= Articulo.objects.create(titulo=titulo, subtitulo= subtitulo, cuerpo= cuerpo, autor=autor)
             url_exitosa=reverse('lista_articulos') #redirecciono a la lista de articulos
             return redirect(url_exitosa)
@@ -82,24 +82,16 @@ def ver_articulo(request, id):
 @login_required
 def editar_articulo(request, id): 
     articulo= Articulo.objects.get(id= id)
+
     if request.method=="POST":
-        form= ArticuloForm(request.POST)
+        form= ArticuloForm(request.POST, instance=articulo)
+
         if form.is_valid():
-            data = form.cleaned_data
-            articulo.titulo= data["titulo"]
-            articulo.subtitulo= data["subtitulo"]
-            articulo.cuerpo= data["cuerpo"]
-            articulo.autor= data["autor"]
             articulo.save()
             return redirect('lista_articulos') 
     else:
-        inicial={
-            'titulo': articulo.titulo,
-            'subtitulo': articulo.subtitulo,
-            'cuerpo': articulo.cuerpo,
-            'autor': articulo.autor,
-        }
-        form= ArticuloForm(initial= inicial)
+        form= ArticuloForm(instance=articulo)
+        
     return render(
         request=request,
         template_name= 'blog/crear_articulo.html',
