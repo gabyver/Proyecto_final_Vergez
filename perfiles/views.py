@@ -6,7 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
-from perfiles.forms import UserRegisterForm, UserUpdateForm 
+from perfiles.forms import UserRegisterForm, UserUpdateForm, AvatarForm 
 
 
 # Create your views here.
@@ -73,3 +73,19 @@ def mi_perfil_update(request):
     context = {'form': form}
     return render(request, 'perfiles/formulario_perfil.html', context)
 
+
+def agregar_avatar(request):
+    if request.method == "POST":
+        form = AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            avatar= form.save()
+            avatar.user= request.user
+            avatar.save()
+            return redirect('inicio')
+    else:
+        form= AvatarForm()
+    return render(
+        request=request, 
+        template_name='perfiles/formulario_avatar.html',
+        context= {'form': form},
+    )
