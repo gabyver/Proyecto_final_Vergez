@@ -26,8 +26,12 @@
             <div class="container">
                 <a class="navbar-brand" href= "{% url 'inicio' %}">Inicio</a>
                 <a class="navbar-brand" href= "{% url 'lista_articulos' %}">Artículos</a>
-                <a class="navbar-brand" href="#!">Iniciar Sesión</a>
-                <a class="btn btn-primary" href="#signup">Registro</a>
+                {% if user.is_autenticated %}
+                <a class="btn btn-primary" href= "{% url 'logout' %}">Cierre Sesión</a>
+                {% else %}
+                <a class="btn btn-primary" href="{% url 'login' %}">Iniciar Sesión</a>
+                {% endif %}
+                <a class="btn btn-success" href="{% url 'registro' %}">Registro</a>
             </div>
         </nav>
 
