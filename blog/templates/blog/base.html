@@ -15,8 +15,14 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
-
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+        <style>
+            .avatar-img {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+            }
+        </style>
     </head>
 
     <body>
@@ -26,26 +32,35 @@
             <div class="container">
                 <a class="navbar-brand" href= "{% url 'inicio' %}">Inicio</a>
                 <a class="navbar-brand" href= "{% url 'lista_articulos' %}">Artículos</a>
+                <a class="navbar-brand" href="{% url 'crear_articulo' %}">Crear Artículo</a>
+                
                 {% if user.is_authenticated %}
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if avatar %}
+                        <img src="{{ avatar.imagen.url }}" alt="Avatar" class="avatar-img">
+                        {% endif %}
                         <div style="display: inline-flex;">
                             <span>{{ user.username }}</span>
                         </div>
                     </button>
+                    
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li>
-                            <a class="dropdown-item" href="{% url 'editar-perfil' %}">Editar mis datos</a>
+                            <a class="dropdown-item" href="{% url 'editar_perfil' %}">Editar mis datos</a>
                         </li>
+
                         <li>
-                            <a class="dropdown-item" href="{% url 'agregar-avatar' %}">Agregar Avatar</a>
+                            <a class="dropdown-item" href="{% url 'agregar_avatar' %}">Agregar o cambiar Avatar</a>
                         </li>
+
                         <li>
                             <a class="dropdown-item" href="{% url 'logout' %}"><strong>Cerrar Sesión</strong></a>
                         </li>
                     </ul>
-                    </div>
+                    
                 </div>
+                <a class="navbar-brand" href= "{% url 'about' %}">About me</a>
                 {% else %}
                 <a class="btn btn-primary" href="{% url 'login' %}">Iniciar Sesión</a>
                 <a class="btn btn-success" href="{% url 'registro' %}">Registro</a>
@@ -81,7 +96,7 @@
                                 <a href="#!"><i class="bi-twitter fs-3"></i></a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="https://www.instagram.com/espndeportes/?hl=es"><i class="bi-instagram fs-3"></i></a>
+                                <a href="#!"><i class="bi-instagram fs-3"></i></a>
                             </li>
                         </ul>
                     </div>

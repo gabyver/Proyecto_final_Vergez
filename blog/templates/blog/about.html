@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+
+{% block contenido %}
+<section>
+    <h1>Acerca de mi</h1>
+    
+    <p>Mi nombre es {{ nombre }}</p><p>Tengo {{ edad }} años</p><p>Soy de {{ pais }}</p>
+    <p>Me recibí de {{ profesion }}</p>
+    <p>{{ descripcion }}</p>
+</section>
+{% endblock contenido %}

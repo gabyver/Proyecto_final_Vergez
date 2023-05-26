@@ -75,6 +75,8 @@
   }
 }
 
+/* Estilos para el fondo */
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -83,7 +85,7 @@ body {
   line-height: var(--bs-body-line-height);
   color: var(--bs-body-color);
   text-align: var(--bs-body-text-align);
-  background-color: var(--bs-body-bg);
+  background-color: #f2f2f2; /* Color de fondo */
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -11365,4 +11367,160 @@ header.masthead h1, header.masthead .h1 {
 footer.footer {
   padding-top: 4rem;
   padding-bottom: 4rem;
+}
+
+
+<style>
+    /* Estilos para los artículos */
+    .articulos-lista {
+        margin-top: 20px;
+    }
+    .articulo {
+        margin-bottom: 20px;
+        border: 1px solid purple; /* Borde alrededor de cada artículo */
+        padding: 20px; /* Espacio interno dentro de cada artículo */
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+    .articulo h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    .articulo p {
+        margin-bottom: 10px;
+    }
+    .articulo .leer-mas {
+        color: blue;
+        text-decoration: underline;
+        cursor: pointer;
+        display: inline-block;
+        background-color: #f2f2f2;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
+    .articulo .leer-mas:hover {
+        color: darkblue;
+    }
+    .articulo .imagen-articulo {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        display: block;
+        margin-bottom: 10px;
+        margin: 0 auto; /* Centrar horizontalmente */
+    }
+
+    .avatar-pequeno {
+      width: 100px;
+      height: 100px;
+    }
+
+</style>
+
+/* Estilos para el fondo del blog */
+body {
+  background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.texto-centrado {
+  text-align: center;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.blog-post {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.blog-post h2 {
+  margin-top: 0;
+}
+
+.blog-post p {
+  margin-bottom: 10px;
+}
+
+.blog-post .read-more {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.blog-post .read-more:hover {
+  color: darkblue;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.leer-mas-activo {
+  background-color: darkblue;
+  color: white;
+  text-decoration: none;
+}
+
+.botones {
+  margin-top: 20px;
+}
+
+.boton-editar,
+.boton-eliminar,
+.boton-volver {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: #f2f2f2;
+  color: #000;
+  text-decoration: none;
+  border: 1px solid #ccc;
+}
+
+.boton-editar {
+  background-color: blue;
+  color: white;
+}
+
+.boton-eliminar {
+  background-color: red;
+  color: white;
 }

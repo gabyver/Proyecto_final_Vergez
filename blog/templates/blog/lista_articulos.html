@@ -3,9 +3,8 @@
 {% block contenido %}
 <section>
     <div>
-        <h1>Lista de Articulos</h1>
-        <a href= "{% url 'crear_articulo' %}">Crear Articulo</a>
-        <br><br>
+        <h1>Lista de Articulos </h1>
+        <br>
         <form action= "{% url 'buscar_articulos' %}" method= "post">
             {% csrf_token %}
             <input type= "text" name= "busqueda"> 
@@ -13,47 +12,24 @@
         </form>
         <br><br>
 
-        <table class= "table">
-            <tbody>
-                <tr>
-                    <th>ID</th>
-                    <th>Titulo</th>
-                    <th>Subtitulo</th>
-                    <th>Ver</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
-                </tr>
-                {% for articulo in articulos %}
-                <tr>
-                    <td>{{articulo.id }}</td>
-                    <td>{{articulo.titulo }}</td>
-                    <td>{{articulo.subtitulo}}</td>
-                    <td>
-                        <a href= "{% url 'ver_articulo' articulo.id %}">Ver</a>
-                    </td>
-                    <td>
-                        {% if user == articulo.autor %}
-                        <form action = "{% url 'editar_articulo' articulo.id %}" method="post">
-                            {% csrf_token %}
-                            <input type= "submit" value= "Editar"/>
-                        </form>
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if user == articulo.autor %}
-                        <form action = "{% url 'eliminar_articulo' articulo.id %}" method="post">
-                            {% csrf_token %}
-                            <input type= "submit" value= "Eliminar"/>
-                        </form>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>   
+        <div class="articulos-lista">
+            {% for articulo in articulos %}
+            <div class="articulo">
+                <h2>{{ articulo.titulo }} - {{ articulo.subtitulo }}</h2>
+                <p>{{ articulo.cuerpo|slice:":150" }}</p> <!-- Mostrar solo los primeros 150 caracteres del cuerpo del artículo -->
+                <a href="{% url 'ver_articulo' articulo.id %}" class="leer-mas">Leer más</a>
+                <br><br>
+                {% if articulo.imagen %}
+                <div class="imagen-articulo-container">
+                    <img src="{{ articulo.imagen.url }}" alt="Imagen del artículo" class="imagen-articulo" style="max-width: 200px; max-height: 200px;">
+                </div>
+                {% endif %}
+                
+            </div>
+            {% endfor %}
+        </div>
 
     </div>
 </section>
 {% endblock contenido %}
-
 

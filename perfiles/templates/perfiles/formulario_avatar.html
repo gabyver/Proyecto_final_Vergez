@@ -2,9 +2,9 @@
 
 {% block contenido %}
 <h3>Subir tu Avatar </h3>
-    <form method= "post" enctype= "multipart/form-data">  #encriptado para soportar subida de imagen
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type= "submit" value= "Subir imagen"/>
-    </form>
+<form method= "post" enctype= "multipart/form-data"> 
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type= "submit" value= "Subir imagen"/>
+</form>
 {% endblock contenido %}

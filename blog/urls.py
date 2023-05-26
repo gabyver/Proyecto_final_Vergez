@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from blog.views import crear_articulo,listar_articulos, buscar_articulos, editar_articulo, eliminar_articulo, ver_articulo
+from blog.views import crear_articulo,listar_articulos, buscar_articulos, editar_articulo, eliminar_articulo, ver_articulo, about
 
 urlpatterns = [
     path("crear/", crear_articulo, name='crear_articulo'),
@@ -9,4 +9,5 @@ urlpatterns = [
     path("editar/<int:id>/", editar_articulo, name='editar_articulo'),
     path("eliminar/<int:id>/", eliminar_articulo, name='eliminar_articulo'),
     path("ver/<int:id>/", ver_articulo, name='ver_articulo'),
+    path("about/", about, name= 'about'),
 ]

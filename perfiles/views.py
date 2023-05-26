@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -7,6 +7,7 @@ from django.contrib.auth.views import LogoutView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from perfiles.forms import UserRegisterForm, UserUpdateForm, AvatarForm 
+from perfiles.models import Avatar
 
 
 # Create your views here.
@@ -53,6 +54,8 @@ def login_view(request):
         context={'form':formulario},
     )
 
+
+
 @login_required
 def custom_logout_view(request):
     view = LogoutView.as_view(template_name='perfiles/logout.html')
@@ -70,20 +73,31 @@ def mi_perfil_update(request):
     else:
         form = UserUpdateForm(instance=request.user)
 
-    context = {'form': form}
-    return render(request, 'perfiles/formulario_perfil.html', context)
+    contexto = {'form': form}
+    return render(
+        request=request, 
+        template_name='perfiles/formulario_perfil.html', 
+        context=contexto
+    )
 
 
+@login_required
 def agregar_avatar(request):
+    try:
+        avatar = Avatar.objects.get(user=request.user)
+    except Avatar.DoesNotExist:
+        avatar = None
+
     if request.method == "POST":
-        form = AvatarForm(request.POST, request.FILES)
+        form = AvatarForm(request.POST, request.FILES, instance=avatar)
         if form.is_valid():
             avatar= form.save()
             avatar.user= request.user
             avatar.save()
             return redirect('inicio')
     else:
-        form= AvatarForm()
+        form= AvatarForm(instance= avatar)
+
     return render(
         request=request, 
         template_name='perfiles/formulario_avatar.html',

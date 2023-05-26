@@ -1,6 +1,10 @@
 {% extends "blog/base.html" %}
 
 {% block contenido %}
-<h1> Bienvenidos a mi blog de viajes {{user.first_name}} </h1>
-<img src ="{{user.avatar.imagen.url}}"/>
+<div class="texto-centrado">
+  <h1>Bienvenido a mi blog de viajes {% if user.is_authenticated %}{{ user.first_name }}{% endif %}</h1>
+  {% if user.is_authenticated %}
+  <img src="{{ user.avatar.imagen.url }}" alt="Avatar" class="avatar-pequeno">
+  {% endif %}
+</div>
 {% endblock contenido %}

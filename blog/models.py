@@ -8,7 +8,7 @@ class Articulo(models.Model):
     cuerpo= models.TextField()
     autor= models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     fecha_publicacion= models.DateTimeField(auto_now_add=True)
-    imagen= models.ImageField(upload_to='images', blank=True)
+    imagen= models.ImageField(upload_to='images')
 
     class Meta:
         ordering = ['-fecha_publicacion']
