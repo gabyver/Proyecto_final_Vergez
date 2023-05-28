@@ -60,10 +60,11 @@
                     </ul>
                     
                 </div>
-                <a class="navbar-brand" href= "{% url 'about' %}">About me</a>
+                
                 {% else %}
                 <a class="btn btn-primary" href="{% url 'login' %}">Iniciar Sesión</a>
                 <a class="btn btn-success" href="{% url 'registro' %}">Registro</a>
+                <a class="navbar-brand" href= "{% url 'about' %}">About me</a>
                 {% endif %}
             </div>
         </nav>

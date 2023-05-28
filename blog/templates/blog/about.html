@@ -2,10 +2,15 @@
 
 {% block contenido %}
 <section>
-    <h1>Acerca de mi</h1>
+    <h1>Mi Perfil</h1>
+    <br>
+    <p>Es una breve presentación para que me conozcan un poquito.</p>
     
     <p>Mi nombre es {{ nombre }}</p><p>Tengo {{ edad }} años</p><p>Soy de {{ pais }}</p>
     <p>Me recibí de {{ profesion }}</p>
     <p>{{ descripcion }}</p>
+    <div class="botones">
+        <a href="{% url 'lista_articulos' %}" class="boton-volver">Volver</a>
+    </div>
 </section>
 {% endblock contenido %}

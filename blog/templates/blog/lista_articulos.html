@@ -4,6 +4,7 @@
 <section>
     <div>
         <h1>Lista de Articulos </h1>
+        {% if articulos %}
         <br>
         <form action= "{% url 'buscar_articulos' %}" method= "post">
             {% csrf_token %}
@@ -11,8 +12,8 @@
             <input type= "submit" value= "Buscar">
         </form>
         <br><br>
-
-        <div class="articulos-lista">
+        
+            <div class="articulos-lista">
             {% for articulo in articulos %}
             <div class="articulo">
                 <h2>{{ articulo.titulo }} - {{ articulo.subtitulo }}</h2>
@@ -27,8 +28,14 @@
                 
             </div>
             {% endfor %}
-        </div>
-
+            </div>
+        {% else %}
+            {% if articulos|length == 0 %}
+                <p>No hay entradas aún.</p>
+            {% else %}
+            <p>Ha ocurrido un error al cargar los artículos.</p>
+            {% endif %}
+        {% endif %}
     </div>
 </section>
 {% endblock contenido %}

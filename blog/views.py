@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from blog.models import Articulo
 from blog.forms import ArticuloForm
@@ -93,27 +93,49 @@ def ver_articulo(request, id):
 
 
 @login_required
-def editar_articulo(request, id_articulo):
-    articulo = get_object_or_404(Articulo, id=id_articulo)
+def editar_articulo(request, id):
+    articulo = Articulo.objects.get(id=id)
 
     if request.user != articulo.autor:
         messages.error(request, "No tienes permiso para editar este artículo.")
-        return redirect('inicio')
-
+        return redirect('lista_articulos')
+    
     if request.method == "POST":
-        form = ArticuloForm(request.POST, instance=articulo)
+        form = ArticuloForm(request.POST, request.FILES, instance=articulo)
         if form.is_valid():
-            form.save()
-            messages.success(request, "El artículo ha sido actualizado.")
-            return redirect('inicio')
+            articulo.titulo = form.cleaned_data['titulo']
+            articulo.subtitulo = form.cleaned_data['subtitulo']
+            articulo.cuerpo = form.cleaned_data['cuerpo']
+            if 'imagen' in form.cleaned_data:
+                articulo.imagen = form.cleaned_data['imagen']
+                form.save()
+                messages.success(request, "Artículo editado correctamente.")
+                return redirect('lista_articulos')
+            else:
+                messages.error(request, "Error al editar el artículo.")
+        else:
+            return render(
+                request= request,
+                template_name= 'blog/editar_articulo.html',
+                context= {
+                    'form': form,
+                    'articulo': articulo
+                }
+            )
+
     else:
         form = ArticuloForm(instance=articulo)
-
-    return render(
-        request=request,
-        template_name='blog/editar_articulo.html',
-        context={'form': form, 'articulo': articulo},
-    )
+        return render(
+            request= request,
+            template_name= 'blog/editar_articulo.html',
+            context= {
+                'form': form,
+                'articulo': articulo
+            }
+        )
+    
+       
+        
 
 
 @login_required
