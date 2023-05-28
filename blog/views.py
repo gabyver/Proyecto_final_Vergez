@@ -31,7 +31,9 @@ def crear_articulo(request):
     if request.method == 'POST':
         form = ArticuloForm(request.POST, request.FILES)
         if form.is_valid():
-            articulo= form.save()
+            articulo = form.save(commit=False)
+            articulo.autor = request.user  # Establece el autor como el usuario actualmente autenticado
+            articulo.save()
             url_exitosa=reverse('lista_articulos') #redirecciono a la lista de articulos
             return redirect(url_exitosa)
     else:

@@ -18,8 +18,8 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
         <style>
             .avatar-img {
-                width: 20px;
-                height: 20px;
+                width: 30px;
+                height: 30px;
                 border-radius: 50%;
             }
         </style>
@@ -33,43 +33,43 @@
                 <a class="navbar-brand" href= "{% url 'inicio' %}">Inicio</a>
                 <a class="navbar-brand" href= "{% url 'lista_articulos' %}">Artículos</a>
                 <a class="navbar-brand" href="{% url 'crear_articulo' %}">Crear Artículo</a>
-                
-                {% if user.is_authenticated %}
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        {% if avatar %}
-                        <img src="{{ avatar.imagen.url }}" alt="Avatar" class="avatar-img">
-                        {% endif %}
-                        <div style="display: inline-flex;">
-                            <span>{{ user.username }}</span>
-                        </div>
-                    </button>
+                <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+                    <ul class="list-inline mb-0 justify-content-end">
+                    {% if user.is_authenticated %}
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            
+                            <div style="display: inline-flex;">
+                                <span>{{ user.username }}</span>
+                                <img src="{{ user.avatar.imagen.url }}" alt="Avatar" class="avatar-pequeno">
+                            </div>
+                        </button>
                     
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li>
-                            <a class="dropdown-item" href="{% url 'editar_perfil' %}">Editar mis datos</a>
-                        </li>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a class="dropdown-item" href="{% url 'editar_perfil' %}">Editar mis datos</a>
+                            </li>
 
-                        <li>
-                            <a class="dropdown-item" href="{% url 'agregar_avatar' %}">Agregar o cambiar Avatar</a>
-                        </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'agregar_avatar' %}">Agregar o cambiar Avatar</a>
+                            </li>
 
-                        <li>
-                            <a class="dropdown-item" href="{% url 'logout' %}"><strong>Cerrar Sesión</strong></a>
-                        </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'logout' %}"><strong>Cerrar Sesión</strong></a>
+                            </li>
+                        </ul>
+                    </div>            
+                    {% else %}
+                    <a class="btn btn-primary" href="{% url 'login' %}">Iniciar Sesión</a>
+                    <a class="btn btn-success" href="{% url 'registro' %}">Registro</a>
+                    {% endif %}                    
                     </ul>
-                    
                 </div>
-                
-                {% else %}
-                <a class="btn btn-primary" href="{% url 'login' %}">Iniciar Sesión</a>
-                <a class="btn btn-success" href="{% url 'registro' %}">Registro</a>
-                <a class="navbar-brand" href= "{% url 'about' %}">About me</a>
-                {% endif %}
+                <a class="navbar-brand" href="{% url 'about' %}">About Me</a>
             </div>
         </nav>
 
-        <section style= "padding: 80px 50px;">
+        <section style= "padding: 50px 50px;">
             {% block contenido %}
             {% endblock contenido %}
         </section>

@@ -64,9 +64,9 @@ def custom_logout_view(request):
 
 
 @login_required
-def mi_perfil_update(request):
+def editar_usuario(request):
     if request.method == "POST":
-        form = UserUpdateForm(request.POST, instance=request.user)
+        form = UserUpdateForm(request.POST, request.FILES,  instance=request.user)
         if form.is_valid():
             form.save()
             return redirect('inicio')

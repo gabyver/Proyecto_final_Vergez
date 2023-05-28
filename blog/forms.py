@@ -7,4 +7,4 @@ class ArticuloForm(forms.ModelForm):
         model = Articulo
         fields = ['titulo', 'subtitulo', 'cuerpo', 'imagen']
 
-       
+    

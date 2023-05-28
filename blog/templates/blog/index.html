@@ -2,9 +2,13 @@
 
 {% block contenido %}
 <div class="texto-centrado">
-  <h1>Bienvenido a mi blog de viajes {% if user.is_authenticated %}{{ user.first_name }}{% endif %}</h1>
-  {% if user.is_authenticated %}
-  <img src="{{ user.avatar.imagen.url }}" alt="Avatar" class="avatar-pequeno">
-  {% endif %}
+  <h1>Bienvenido a mi blog de viajes {% if user.is_authenticated %}{{ user.first_name }}<img src="{{ user.avatar.imagen.url }}" alt="Avatar" class="avatar-mediano">{% endif %}</h1>
+
+    <p>Este es el blog de viajes en el que puedes publicar anécdotas, fotos, información útil para otros lectores 
+    <p>que quieran viajar llevando datos que puedan utilizar de acuerdo a sus gustos y necesidades.
+    <div class="inicio-image-container">
+        <img src="media\images\paisaje.jpg" alt="Imagen inicio" class="imagen-articulo">
+    </div>
+
 </div>
 {% endblock contenido %}

@@ -77,6 +77,34 @@
 
 /* Estilos para el fondo */
 
+header {
+  background-color: #fcf2f2; /* Fondo blanco para la barra de navegación */
+  padding: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: right; /* Alineación a la derecha */
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+nav ul li a {
+  font-size: 14px; /* Tamaño de letra pequeño */
+  text-decoration: none;
+  color: #333; /* Color del texto */
+}
+
+.content {
+  padding: 20px;
+}
+
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -85,7 +113,7 @@ body {
   line-height: var(--bs-body-line-height);
   color: var(--bs-body-color);
   text-align: var(--bs-body-text-align);
-  background-color: #f2f2f2; /* Color de fondo */
+  background-color: #c7e5f7; /* Color de fondo */
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -11363,8 +11391,9 @@ header.masthead h1, header.masthead .h1 {
   left: 0;
   opacity: 0.5;
 }
-
-footer.footer {
+footer {
+  background-color: #fff; /* Fondo blanco para el pie de página */
+  padding: 5px;
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
@@ -11373,10 +11402,11 @@ footer.footer {
 <style>
     /* Estilos para los artículos */
     .articulos-lista {
-        margin-top: 20px;
+        font-size: 50px;
+        margin-top: 50px;
     }
     .articulo {
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         border: 1px solid purple; /* Borde alrededor de cada artículo */
         padding: 20px; /* Espacio interno dentro de cada artículo */
         max-width: 700px;
@@ -11414,10 +11444,13 @@ footer.footer {
     }
 
     .avatar-pequeno {
-      width: 100px;
-      height: 100px;
+      width: 30px;
+      height: 30px;
     }
-
+    .avatar-mediano {
+      width: 150px;
+      height: 150px;
+    }
 </style>
 
 /* Estilos para el fondo del blog */
@@ -11523,4 +11556,7 @@ footer {
 .boton-eliminar {
   background-color: red;
   color: white;
+}
+.about-me {
+  text-align: center; /* Centrar el contenido del div */
 }
